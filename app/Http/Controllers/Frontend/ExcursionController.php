@@ -15,9 +15,6 @@ class ExcursionController extends Controller
     {
         $excursions = Excursion::with('images')->orderBy('id', 'DESC')->paginate(6);
 
-//        dump($excursions[4]->images);
-//
-//        dd();
         return view('frontend.pages.excursions', compact('excursions'));
     }
 

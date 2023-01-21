@@ -82,7 +82,7 @@
                                 <div class="form-group row">
                                     <label for="schedule" class="col-sm-2 col-form-label">Время</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="schedule" name="schedule_time" placeholder="{{ date('d.m.Y H:00') }}">
+                                        <input type="text" class="form-control" id="schedule" name="schedule_time" value="{{ old('schedule_time') ?? date('d.m.Y H:00') }}" placeholder="{{ date('d.m.Y H:00') }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">

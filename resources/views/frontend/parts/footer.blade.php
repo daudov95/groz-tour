@@ -11,13 +11,7 @@
                         <a href="{{ route('about') }}" class="footer__link">О нас</a>
                     </li>
                     <li class="footer__item">
-                        <a href="{{ route('events') }}" class="footer__link">Мероприятия организации</a>
-                    </li>
-                    <li class="footer__item">
                         <a href="{{ route('excursions') }}" class="footer__link">Пушкинская карта</a>
-                    </li>
-                    <li class="footer__item">
-                        <a href="{{ route('legislation') }}" class="footer__link">Законодательство</a>
                     </li>
                     <li class="footer__item">
                         <a href="{{ route('contacts') }}" class="footer__link">Контакты</a>
@@ -52,9 +46,6 @@
             <div class="footer__col footer__col--end">
                 <h5 class="footer__title">Наши соцсети</h5>
                 <div class="footer-social">
-                    <a href="#" class="footer-social__link">
-                        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 512 512"><path d="M492.044 106.769c-18.482-21.97-52.604-30.931-117.77-30.931H137.721c-66.657 0-101.358 9.54-119.77 32.93C0 131.572 0 165.174 0 211.681v88.64c0 90.097 21.299 135.842 137.721 135.842h236.554c56.512 0 87.826-7.908 108.085-27.296C503.136 388.985 512 356.522 512 300.321v-88.64c0-49.045-1.389-82.845-19.956-104.912zM328.706 268.238l-107.418 56.14a16.504 16.504 0 0 1-7.65 1.878 16.517 16.517 0 0 1-16.516-16.516V197.82a16.516 16.516 0 0 1 24.128-14.657l107.418 55.778a16.515 16.515 0 0 1 .038 29.297z" style="fill:#d7143a"></path></svg>
-                    </a>
                     <a href="#" class="footer-social__link">
                         <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="enable-background:new 0 0 551.034 551.034" viewBox="0 0 551.034 551.034"><linearGradient id="a" x1="275.517" x2="275.517" y1="4.571" y2="549.72" gradientTransform="matrix(1 0 0 -1 0 554)" gradientUnits="userSpaceOnUse"><stop offset="0" style="stop-color:#e09b3d"></stop><stop offset=".3" style="stop-color:#c74c4d"></stop><stop offset=".6" style="stop-color:#c21975"></stop><stop offset="1" style="stop-color:#7024c4"></stop></linearGradient><path d="M386.878 0H164.156C73.64 0 0 73.64 0 164.156v222.722c0 90.516 73.64 164.156 164.156 164.156h222.722c90.516 0 164.156-73.64 164.156-164.156V164.156C551.033 73.64 477.393 0 386.878 0zM495.6 386.878c0 60.045-48.677 108.722-108.722 108.722H164.156c-60.045 0-108.722-48.677-108.722-108.722V164.156c0-60.046 48.677-108.722 108.722-108.722h222.722c60.045 0 108.722 48.676 108.722 108.722v222.722z" style="fill:url(#a)"></path><linearGradient id="b" x1="275.517" x2="275.517" y1="4.571" y2="549.72" gradientTransform="matrix(1 0 0 -1 0 554)" gradientUnits="userSpaceOnUse"><stop offset="0" style="stop-color:#e09b3d"></stop><stop offset=".3" style="stop-color:#c74c4d"></stop><stop offset=".6" style="stop-color:#c21975"></stop><stop offset="1" style="stop-color:#7024c4"></stop></linearGradient><path d="M275.517 133C196.933 133 133 196.933 133 275.516s63.933 142.517 142.517 142.517S418.034 354.1 418.034 275.516 354.101 133 275.517 133zm0 229.6c-48.095 0-87.083-38.988-87.083-87.083s38.989-87.083 87.083-87.083c48.095 0 87.083 38.988 87.083 87.083 0 48.094-38.989 87.083-87.083 87.083z" style="fill:url(#b)"></path><linearGradient id="c" x1="418.306" x2="418.306" y1="4.571" y2="549.72" gradientTransform="matrix(1 0 0 -1 0 554)" gradientUnits="userSpaceOnUse"><stop offset="0" style="stop-color:#e09b3d"></stop><stop offset=".3" style="stop-color:#c74c4d"></stop><stop offset=".6" style="stop-color:#c21975"></stop><stop offset="1" style="stop-color:#7024c4"></stop></linearGradient><circle cx="418.306" cy="134.072" r="34.149" style="fill:url(#c)"></circle></svg>
                     </a>

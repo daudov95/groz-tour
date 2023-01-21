@@ -1,11 +1,10 @@
 @extends('frontend.layouts.layout')
 
-@section('custom_styles')
-{{--    <link src="{{ asset('') }}">--}}
-<link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
-/>
+@section('custom_style')
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
 <style>
     .card-price__btn {
         padding: 15px;

@@ -30,7 +30,7 @@
         <div class="container">
             <div class="cards__wrap">
 
-                <h1 class="cards__title">Все услуги</h1>
+                <h1 class="cards__title page-title">Все экскурсии</h1>
 
                 <div class="cards-list">
 

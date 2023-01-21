@@ -8,7 +8,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.min.css')  }}">
-    @yield('custom_styles')
+    @yield('custom_style')
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@300;400;500;700&display=swap" rel="stylesheet">

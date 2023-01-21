@@ -26,7 +26,7 @@ class StoreScheduleRequest extends FormRequest
         return [
             'id' => ['required'],
             'schedule_time' => ['required'],
-            'schedule_price' => ['required'],
+            'schedule_price' => ['required', 'numeric'],
         ];
     }
 
@@ -36,6 +36,7 @@ class StoreScheduleRequest extends FormRequest
             'id.required' => 'Id отсутствует',
             'schedule_time.required' => 'Укажите Время',
             'schedule_price.required' => 'Укажите Цену',
+            'schedule_price.numeric' => 'Укажите Цену в правильном формате (например: 1000)',
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\DetailsController;
 use App\Http\Controllers\Frontend\EventController;
 use App\Http\Controllers\Frontend\ExcursionController;
 use App\Http\Controllers\Frontend\LegislationController;
+use App\Http\Controllers\Frontend\MainController;
 use App\Http\Controllers\Frontend\PaymentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware'], function () {
 
     /* Excursion */
-    Route::get('/', [ExcursionController::class, 'index'])->name('index');
+    Route::get('/', [MainController::class, 'index'])->name('index');
     Route::get('/excursions', [ExcursionController::class, 'index'])->name('excursions');
     Route::get('/excursions/{id}', [ExcursionController::class, 'single'])->name('single-excursion');
 
