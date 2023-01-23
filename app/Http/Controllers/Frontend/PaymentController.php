@@ -27,6 +27,36 @@ class PaymentController extends Controller
         dd($response);
     }
 
+    public function paymentHandler()
+    {
+        $secret_seed = env('PAYMENT_SECRET_SEED');
+        $id = $_POST['id'];
+        $sum = $_POST['sum'];
+        $clientid = $_POST['clientid'];
+        $orderid = $_POST['orderid'];
+        $key = $_POST['key'];
+
+        Log::info('Post: '.$_POST);
+        if ($key != md5 ($id.number_format($sum, 2, ".", "")
+                .$clientid.$orderid.$secret_seed))
+        {
+            echo "Error! Hash mismatch";
+            exit;
+        }
+
+        # Рекомендуем проверять, существует ли заказ $orderid,
+        # принадлежит ли он пользователю $clientid,
+        # совпадает ли его сумма с переданной $sum
+
+
+        # Заказ $orderid можно считать оплаченным,
+        # нужно отметить, что он оплачен
+
+
+        echo "OK ".md5($id.$secret_seed);
+        exit;
+    }
+
     public function success(Request $request): View
     {
         if($request->method() == 'GET') {

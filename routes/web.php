@@ -45,6 +45,7 @@ Route::group(['middleware'], function () {
     Route::match(['get', 'post'], '/payment/error', [PaymentController::class, 'error'])->name('payment.error');
     Route::get('/payment/{id}', [PaymentController::class, 'payment'])->name('payment.index');
     Route::post('/payment/{id}', [PaymentController::class, 'paymentStore'])->name('payment.store');
+    Route::post('/payment/handler', [PaymentController::class, 'paymentHandler'])->name('payment.handler');
     Route::get('/payment/order/{order_id}:{session_id}', [PaymentController::class, 'orderInfo'])->name('payment.order');
 
     /* Details */
