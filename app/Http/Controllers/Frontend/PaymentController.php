@@ -8,8 +8,10 @@ use App\Mail\OrderExcursion;
 use App\Models\Excursion;
 use App\Models\ExcursionSchedule;
 use App\Models\Transaction;
+use App\Services\Paykeeper\PaykeeperService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
@@ -32,8 +34,34 @@ class PaymentController extends Controller
         }
 
 
-        $xml = base64_decode($request->xmlmsg);
-        $response = $this->xmlToJson($xml);
+        $secret_seed = env('PAYMENT_SECRET_SEED');
+        $id = $_POST['id'];
+        $sum = $_POST['sum'];
+        $clientid = $_POST['clientid'];
+        $orderid = $_POST['orderid'];
+        $key = $_POST['key'];
+//        file_put_contents('response_payment.txt', $id, FILE_APPEND);
+
+        Log::info('ID: '.$id.' order id:'.$orderid.' sum:'.$sum);
+        if ($key != md5 ($id.number_format($sum, 2, ".", "")
+                .$clientid.$orderid.$secret_seed))
+        {
+            echo "Error! Hash mismatch";
+            exit;
+        }
+
+        # Рекомендуем проверять, существует ли заказ $orderid,
+        # принадлежит ли он пользователю $clientid,
+        # совпадает ли его сумма с переданной $sum
+
+
+        # Заказ $orderid можно считать оплаченным,
+        # нужно отметить, что он оплачен
+
+
+        echo "OK ".md5($id.$secret_seed);
+        exit;
+
 
         $order_status = $this->createOrderStatusXml($response->OrderID, $response->SessionID);
         $order_status = $this->xmlToJson($this->responseOrder($order_status))->Response;
@@ -117,37 +145,56 @@ class PaymentController extends Controller
         return view('frontend.pages.payment.index', compact('schedule'));
     }
 
-    public function paymentStore(StorePaymentRequest $request)
+    public function paymentStore(StorePaymentRequest $request, PaykeeperService $paykeeper)
     {
-        $excursion_schedule = ExcursionSchedule::find($request->id);
-        $excursion = $excursion_schedule->excursion;
-        $description = $excursion->title . ' - '. $excursion->id;
+        $order = $paykeeper->getOrder();
 
-        $xml = $this->createOrderXml('CreateOrder', 'Purchase', $excursion_schedule->float_price, $description);
-        $response = $this->responseOrder($xml);
-        $response = $this->xmlToJson($response)->Response;
+        if(isset($order['invoice_id'])) {
+            $excursion_schedule = ExcursionSchedule::find($request->id);
 
-        $newTransaction = Transaction::create([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'price' => $excursion_schedule->price,
-            'date' => $excursion_schedule->custom_date,
-            'excursion_id' => $request->id,
-            'order_id' => $response->Order->OrderID,
-            'session_id' => $response->Order->SessionID,
-        ]);
-
-        $urlToParams = [
-            'ORDERID' => $response->Order->OrderID,
-            'SESSIONID' => $response->Order->SessionID,
-        ];
-
-        $urlTo = $response->Order->URL.'?'.http_build_query($urlToParams);
-
-        if($response->Status === "00"){
-            return redirect()->away($urlTo);
+            $newTransaction = Transaction::create([
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'price' => $excursion_schedule->price,
+                'date' => $excursion_schedule->custom_date,
+                'excursion_id' => $request->id,
+                'order_id' => $order['invoice_id'],
+                'session_id' => 'nullable'
+            ]);
         }
+
+
+        dd($order);
+//        $excursion_schedule = ExcursionSchedule::find($request->id);
+//        $excursion = $excursion_schedule->excursion;
+//        $description = $excursion->title . ' - '. $excursion->id;
+//
+//        $xml = $this->createOrderXml('CreateOrder', 'Purchase', $excursion_schedule->float_price, $description);
+//        $response = $this->responseOrder($xml);
+//        $response = $this->xmlToJson($response)->Response;
+//
+//        $newTransaction = Transaction::create([
+//            'name' => $request->name,
+//            'phone' => $request->phone,
+//            'email' => $request->email,
+//            'price' => $excursion_schedule->price,
+//            'date' => $excursion_schedule->custom_date,
+//            'excursion_id' => $request->id,
+//            'order_id' => $response->Order->OrderID,
+//            'session_id' => $response->Order->SessionID,
+//        ]);
+//
+//        $urlToParams = [
+//            'ORDERID' => $response->Order->OrderID,
+//            'SESSIONID' => $response->Order->SessionID,
+//        ];
+//
+//        $urlTo = $response->Order->URL.'?'.http_build_query($urlToParams);
+//
+//        if($response->Status === "00"){
+//            return redirect()->away($urlTo);
+//        }
     }
 
     public function orderStatusInfo($OrderID, $SessionID)
